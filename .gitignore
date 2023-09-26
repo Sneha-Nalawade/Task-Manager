@@ -1,0 +1,7 @@
+/node_modules
+.env
+
+// inorder to ignore the secretive content inside .env (that is to really keep it hidden), its imp that u include this 
+// file's name in .gitignore, so that it is really ignored i.e. hidden
+
+//env variables- key-value pairs without quotes
