@@ -4,10 +4,14 @@ const connectDB = require('./db/connect')
 const tasks = require('./routes/tasks')
 const notFound = require('./middlewares/not-found')
 const errorHandlerMiddleware = require('./middlewares/error-handler')
+// const path = require('path');
 
 require('dotenv').config()
 
 //middlewares
+// const publicPath = path.join(__dirname, 'public');
+
+// app.use(express.static('publicPath'));
 app.use(express.static('./public'))
 app.use(express.json())  //if this statement is not written, the added tasks info won't be present in the req.body
 
@@ -16,13 +20,18 @@ app.use(express.json())  //if this statement is not written, the added tasks inf
 //     res.send("Task Manager App");
 // })
 
+// Define a route for the root URL
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(publicPath, 'index.html'));
+//   }); // these 3 lines and the above __dirname, public - path waale 2 lines when used are giving an error...dont knoe whyyy??
+
 app.use('/api/v1/tasks', tasks)
 
 app.use(notFound) //if the above app.use not executed (i.e. a valid url of type /api/v1/tasks not passed), then this app.use for not-found will be run instead
 app.use(errorHandlerMiddleware) //to handle the 500 status waala error in next(err) of asyncwrapper middlewares
 
 //app.get('/api/v1/tasks')        -get all the tasks (list)
-//app.post('/api/v1/taks')        -craete a new task
+//app.post('/api/v1/taks')        -create a new task
 //app.get('/api/v1/tasks/:id')    -get single task
 //app.patch('/api/v1/tasks/:id')  -update/edit task
 //app.delete('/api/v1/tasks/:id') -delete task
